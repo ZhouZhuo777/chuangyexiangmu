@@ -135,6 +135,7 @@ public class NewBehaviourScript : MonoBehaviour
             var item = _items.Peek();
             if (item.type == 食物.鸡蛋)
             {        AddFood(食物.顶部);
+                Succeed();
 return;
             }
         }
@@ -167,6 +168,11 @@ return;
         }
         var xx=Instantiate(叉叉,番茄按钮.transform);
         StartCoroutine(sdad(xx));
+    }
+
+    private void Succeed()
+    {
+        
     }
 }
 

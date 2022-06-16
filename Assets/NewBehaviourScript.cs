@@ -25,6 +25,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Image arr;
     public countdown Countdown;
 
+
     public Button failButton;
     public GameObject 叉叉;
 
@@ -32,6 +33,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     public GameObject 失败;
     public GameObject 成功;
+    
+
     IEnumerator Start()
     {
         底部按钮.onClick.AddListener(底部Function);
@@ -52,10 +55,10 @@ public class NewBehaviourScript : MonoBehaviour
     {
         Application.LoadLevel(0);
     }
-
+    
     private void AddFood(食物 type)
     {
-        GameObject g=null;
+        GameObject g = null;
         switch (type)
         {
             case 食物.土豆:
@@ -67,20 +70,21 @@ public class NewBehaviourScript : MonoBehaviour
             case 食物.底部:
                 g = 底部;
                 break;
-            case 食物.顶部:                
+            case 食物.顶部:
                 g = 顶部;
                 break;
-            case 食物.牛排:                
+            case 食物.牛排:
                 g = 牛排;
                 break;
-            case 食物.番茄:               
+            case 食物.番茄:
                 g = 番茄;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
-        var tt=Instantiate(g, gm.transform).GetComponent<item>();
-        if (_items.Count==0)
+
+        var tt = Instantiate(g, gm.transform).GetComponent<item>();
+        if (_items.Count == 0)
         {
             _items.Push(tt);
             高度 += tt.厚度 / 2;
@@ -88,20 +92,23 @@ public class NewBehaviourScript : MonoBehaviour
         else
         {
             _items.Push(tt);
-            tt.GetComponent<RectTransform>().anchoredPosition = tt.GetComponent<RectTransform>().anchoredPosition+new Vector2(0,高度);
+            tt.GetComponent<RectTransform>().anchoredPosition =
+                tt.GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 高度);
             高度 += tt.厚度;
         }
+
+        moveArr();
     }
-    
 
     void 底部Function()
     {
-        if (_items.Count==0)
+        if (_items.Count == 0)
         {
             AddFood(食物.底部);
-           return;
+            return;
         }
-        var xx=Instantiate(叉叉,底部按钮.transform);
+
+        var xx = Instantiate(叉叉, 底部按钮.transform);
         StartCoroutine(sdad(xx));
     }
 
@@ -117,7 +124,7 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
 
-        var xx=Instantiate(叉叉,土豆按钮.transform);
+        var xx = Instantiate(叉叉, 土豆按钮.transform);
         StartCoroutine(sdad(xx));
     }
 
@@ -138,51 +145,61 @@ public class NewBehaviourScript : MonoBehaviour
                 return;
             }
         }
-        var xx=Instantiate(叉叉,鸡蛋按钮.transform);
+
+        var xx = Instantiate(叉叉, 鸡蛋按钮.transform);
         StartCoroutine(sdad(xx));
     }
+
     void 顶部Function()
     {
         if (_items.Count != 0)
         {
             var item = _items.Peek();
             if (item.type == 食物.鸡蛋)
-            {        AddFood(食物.顶部);
+            {
+                AddFood(食物.顶部);
                 Succeed();
-return;
+                return;
             }
         }
-        var xx=Instantiate(叉叉,顶部按钮.transform);
-        StartCoroutine(sdad(xx));
 
-    }void 牛排Function()
+        var xx = Instantiate(叉叉, 顶部按钮.transform);
+        StartCoroutine(sdad(xx));
+    }
+
+    void 牛排Function()
     {
         if (_items.Count != 0)
         {
             var item = _items.Peek();
             if (item.type == 食物.底部)
-            {        
+            {
                 AddFood(食物.牛排);
+                return;
+
             }
         }
-        var xx=Instantiate(叉叉,牛排按钮.transform);
-        StartCoroutine(sdad(xx));
 
+        var xx = Instantiate(叉叉, 牛排按钮.transform);
+        StartCoroutine(sdad(xx));
     }
+
     void 番茄Function()
     {
-        if (_items.Count!=0)
+        if (_items.Count != 0)
         {
             var item = _items.Peek();
-            if ( item.type== 食物.牛排)
+            if (item.type == 食物.牛排)
             {
                 AddFood(食物.番茄);
+                return;
             }
         }
-        var xx=Instantiate(叉叉,番茄按钮.transform);
+
+        var xx = Instantiate(叉叉, 番茄按钮.transform);
         StartCoroutine(sdad(xx));
     }
-    
+
 
     private void Succeed()
     {
@@ -198,10 +215,11 @@ return;
             arr.gameObject.SetActive(false);
             return;
         }
+
         arr.transform.position = new Vector3(arr.transform.position.x, images[i].transform.position.y,
             arr.transform.position.z);
     }
-    }
+}
 
 public enum 食物
 {

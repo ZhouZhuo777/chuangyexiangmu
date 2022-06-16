@@ -17,12 +17,11 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject 底部;
     public GameObject 土豆;
     public GameObject 鸡蛋;
-
     public GameObject 顶部;
     public GameObject 番茄;
-
     public GameObject 牛排;
 
+    public Button 提交;
     void Start()
     {
         底部按钮.onClick.AddListener(底部Function);
@@ -31,10 +30,10 @@ public class NewBehaviourScript : MonoBehaviour
         番茄按钮.onClick.AddListener(番茄Function);
         顶部按钮.onClick.AddListener(顶部Function);
         牛排按钮.onClick.AddListener(牛排Function);
-
+        提交.onClick.AddListener(提交Function);
     }
 
-    private List<item> _items=new List<item>();
+    private Stack<item> _items = new Stack<item>();
     private float 高度=0;
     private void AddFood(食物 type)
     {
@@ -65,41 +64,92 @@ public class NewBehaviourScript : MonoBehaviour
         var tt=Instantiate(g, gm.transform).GetComponent<item>();
         if (_items.Count==0)
         {
-            _items.Add(tt);
+            _items.Push(tt);
             高度 += tt.厚度 / 2;
         }
         else
         {
-            _items.Add(tt);
+            _items.Push(tt);
             tt.GetComponent<RectTransform>().anchoredPosition = tt.GetComponent<RectTransform>().anchoredPosition+new Vector2(0,高度);
             高度 += tt.厚度;
         }
     }
+
+    private void 提交Function()
+    {
+        
+    }
+
     void 底部Function()
     {
-        AddFood(食物.底部);
+        if (_items.Count==0)
+        {
+            AddFood(食物.底部);
+           
+        }
     }
 
     void 土豆Function()
     {
-        AddFood(食物.土豆);
+        if (_items.Count != 0)
+        {
+            var item = _items.Peek();
+            if (item.type == 食物.番茄)
+            {
+                AddFood(食物.土豆);
+
+            }
+        }
+
 
     }void 鸡蛋Function()
     {
-        AddFood(食物.鸡蛋);
+        if (_items.Count != 0)
+        {
+            var item = _items.Peek();
+            if (item.type == 食物.土豆)
+            {
+                AddFood(食物.鸡蛋);
+
+            }
+        }
+
 
     }void 顶部Function()
     {
-        AddFood(食物.顶部);
+        if (_items.Count != 0)
+        {
+            var item = _items.Peek();
+            if (item.type == 食物.鸡蛋)
+            {        AddFood(食物.顶部);
+
+            }
+        }
+
 
     }void 牛排Function()
     {
-        AddFood(食物.牛排);
+        if (_items.Count != 0)
+        {
+            var item = _items.Peek();
+            if (item.type == 食物.底部)
+            {        
+                AddFood(食物.牛排);
+            }
+        }
+
 
     }
     void 番茄Function()
     {
-        AddFood(食物.番茄);
+        if (_items.Count!=0)
+        {
+            var item = _items.Peek();
+            if ( item.type== 食物.牛排)
+            {
+                AddFood(食物.番茄);
+            }
+        }
 
     }
 }

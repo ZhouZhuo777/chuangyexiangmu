@@ -7,8 +7,10 @@ public class countdown : MonoBehaviour
 {
     private Image countDown;
     private float allTime;
+    public bool isVictory;
     void Start()
     {
+        isVictory = false;
         TryGetComponent(out countDown);
         countDown.fillAmount = 1;
         allTime = 60;
@@ -17,11 +19,14 @@ public class countdown : MonoBehaviour
     private float curTime = 0;
     void Update()
     {
-        curTime += Time.deltaTime;
-        if (curTime >= 1)
+        if (countDown.fillAmount != 0 && !isVictory)
         {
-            countDown.fillAmount -= 0.02f;
-            curTime = 0;
+            curTime += Time.deltaTime;
+            if (curTime >= 1)
+            {
+                countDown.fillAmount -= 0.02f;
+                curTime = 0;
+            }
         }
     }
 }

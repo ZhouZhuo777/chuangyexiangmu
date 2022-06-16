@@ -21,6 +21,10 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject 番茄;
     public GameObject 牛排;
 
+    public Image[] images;
+    public Image arr;
+    public countdown Countdown;
+     
     public Button 提交;
     void Start()
     {
@@ -151,6 +155,24 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
 
+    }
+
+    void moveArr()
+    {
+        int i = _items.Count;
+        if (i >= images.Length)
+        {
+            Countdown.isVictory = true;
+            arr.gameObject.SetActive(false);
+            return;
+        }
+        arr.transform.position = new Vector3(arr.transform.position.x, images[i].transform.position.y,
+            arr.transform.position.z);
+    }
+
+    private void Update()
+    {
+        moveArr();
     }
 }
 

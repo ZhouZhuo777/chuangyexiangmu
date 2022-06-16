@@ -41,7 +41,7 @@ public class countdown : MonoBehaviour
             curTime += Time.deltaTime;
             if (curTime >= 1)
             {
-                countDown.fillAmount -= 0.2f;
+                countDown.fillAmount -= 0.015f;
                 if (countDown.fillAmount <= 0)
                 {
                     isFail = true;

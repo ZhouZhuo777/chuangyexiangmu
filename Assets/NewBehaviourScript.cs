@@ -21,6 +21,10 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject 番茄;
     public GameObject 牛排;
 
+    public Image[] images;
+    public Image arr;
+    public countdown Countdown;
+     
     public Button 提交;
     public GameObject 叉叉;
     void Start()
@@ -169,12 +173,26 @@ return;
         var xx=Instantiate(叉叉,番茄按钮.transform);
         StartCoroutine(sdad(xx));
     }
+    
 
     private void Succeed()
     {
         
     }
-}
+
+    void moveArr()
+    {
+        int i = _items.Count;
+        if (i >= images.Length)
+        {
+            Countdown.isVictory = true;
+            arr.gameObject.SetActive(false);
+            return;
+        }
+        arr.transform.position = new Vector3(arr.transform.position.x, images[i].transform.position.y,
+            arr.transform.position.z);
+    }
+    }
 
 public enum 食物
 {

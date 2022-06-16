@@ -22,6 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject 牛排;
 
     public Button 提交;
+    public GameObject 叉叉;
     void Start()
     {
         底部按钮.onClick.AddListener(底部Function);
@@ -85,8 +86,10 @@ public class NewBehaviourScript : MonoBehaviour
         if (_items.Count==0)
         {
             AddFood(食物.底部);
-           
+           return;
         }
+        var xx=Instantiate(叉叉,底部按钮.transform);
+        StartCoroutine(sdad(xx));
     }
 
     void 土豆Function()
@@ -97,12 +100,21 @@ public class NewBehaviourScript : MonoBehaviour
             if (item.type == 食物.番茄)
             {
                 AddFood(食物.土豆);
-
+                return;
             }
         }
 
+        var xx=Instantiate(叉叉,土豆按钮.transform);
+        StartCoroutine(sdad(xx));
+    }
 
-    }void 鸡蛋Function()
+    private IEnumerator sdad(GameObject xx)
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(xx);
+    }
+
+    void 鸡蛋Function()
     {
         if (_items.Count != 0)
         {
@@ -110,22 +122,24 @@ public class NewBehaviourScript : MonoBehaviour
             if (item.type == 食物.土豆)
             {
                 AddFood(食物.鸡蛋);
-
+                return;
             }
         }
-
-
-    }void 顶部Function()
+        var xx=Instantiate(叉叉,鸡蛋按钮.transform);
+        StartCoroutine(sdad(xx));
+    }
+    void 顶部Function()
     {
         if (_items.Count != 0)
         {
             var item = _items.Peek();
             if (item.type == 食物.鸡蛋)
             {        AddFood(食物.顶部);
-
+return;
             }
         }
-
+        var xx=Instantiate(叉叉,顶部按钮.transform);
+        StartCoroutine(sdad(xx));
 
     }void 牛排Function()
     {
@@ -137,7 +151,8 @@ public class NewBehaviourScript : MonoBehaviour
                 AddFood(食物.牛排);
             }
         }
-
+        var xx=Instantiate(叉叉,牛排按钮.transform);
+        StartCoroutine(sdad(xx));
 
     }
     void 番茄Function()
@@ -150,7 +165,8 @@ public class NewBehaviourScript : MonoBehaviour
                 AddFood(食物.番茄);
             }
         }
-
+        var xx=Instantiate(叉叉,番茄按钮.transform);
+        StartCoroutine(sdad(xx));
     }
 }
 

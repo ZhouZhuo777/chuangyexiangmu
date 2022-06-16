@@ -21,7 +21,6 @@ public class countdown : MonoBehaviour
         countDown.fillAmount = 1;
         allTime = 60;
         
-        canvas.SetActive(false);
         victory.SetActive(false);
         fail.SetActive(false);
     }

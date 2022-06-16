@@ -24,10 +24,15 @@ public class NewBehaviourScript : MonoBehaviour
     public Image[] images;
     public Image arr;
     public countdown Countdown;
-     
-    public Button 提交;
+
+    public Button failButton;
     public GameObject 叉叉;
-    void Start()
+
+    public Image image;
+
+    public GameObject 失败;
+    public GameObject 成功;
+    IEnumerator Start()
     {
         底部按钮.onClick.AddListener(底部Function);
         土豆按钮.onClick.AddListener(土豆Function);
@@ -35,11 +40,19 @@ public class NewBehaviourScript : MonoBehaviour
         番茄按钮.onClick.AddListener(番茄Function);
         顶部按钮.onClick.AddListener(顶部Function);
         牛排按钮.onClick.AddListener(牛排Function);
-        //提交.onClick.AddListener(提交Function);
+        failButton.onClick.AddListener(FailFunction);
+        yield return new WaitForSeconds(0.5f);
+        image.enabled = true;
     }
 
     private Stack<item> _items = new Stack<item>();
-    private float 高度=0;
+    private float 高度 = 0;
+
+    private void FailFunction()
+    {
+        Application.LoadLevel(0);
+    }
+
     private void AddFood(食物 type)
     {
         GameObject g=null;
@@ -79,11 +92,7 @@ public class NewBehaviourScript : MonoBehaviour
             高度 += tt.厚度;
         }
     }
-
-    private void 提交Function()
-    {
-        
-    }
+    
 
     void 底部Function()
     {
@@ -177,7 +186,7 @@ return;
 
     private void Succeed()
     {
-        
+        成功.SetActive(true);
     }
 
     void moveArr()

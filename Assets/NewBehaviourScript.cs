@@ -30,7 +30,7 @@ public class NewBehaviourScript : MonoBehaviour
         番茄按钮.onClick.AddListener(番茄Function);
         顶部按钮.onClick.AddListener(顶部Function);
         牛排按钮.onClick.AddListener(牛排Function);
-        提交.onClick.AddListener(提交Function);
+        //提交.onClick.AddListener(提交Function);
     }
 
     private Stack<item> _items = new Stack<item>();
